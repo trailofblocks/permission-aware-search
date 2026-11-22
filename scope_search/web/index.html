@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Search workplace documents and get citations from sources you can access.">
+  <title>Scope · Workspace search</title>
+  <link rel="stylesheet" href="/assets/styles.css">
+  <script type="module" src="/assets/app.js"></script>
+</head>
+<body>
+  <div class="layout">
+    <aside class="sidebar">
+      <a class="brand" href="/" aria-label="Scope home"><span class="brand-mark" aria-hidden="true"></span>Scope</a>
+      <div id="workspace" class="workspace" hidden>
+        <span class="workspace-mark" id="workspace-initial" aria-hidden="true"></span>
+        <div><strong id="workspace-name"></strong><span>Workspace</span></div>
+      </div>
+      <nav aria-label="Workspace navigation" id="navigation" hidden>
+        <button class="nav-item" id="nav-search" type="button" aria-current="page"><i class="glass" aria-hidden="true"></i> Search</button>
+        <button class="nav-item" id="nav-access" type="button" hidden><i class="shield" aria-hidden="true"></i> Access review</button>
+      </nav>
+      <div class="sidebar-footer">
+        <span class="lock-mark" aria-hidden="true"></span>
+        <p>Document permissions apply to search and answers.</p>
+      </div>
+    </aside>
+
+    <main class="main">
+      <header class="topbar">
+        <div><p class="top-context" id="top-context">Workspace</p><h1 id="page-title">Search</h1></div>
+        <div class="account" id="account" hidden>
+          <span class="avatar" id="avatar" aria-hidden="true"></span>
+          <div class="account-id"><strong id="account-name"></strong><span id="account-role"></span></div>
+          <label class="select-label" id="demo-select" hidden><span class="sr-only">Switch demo account</span><select id="actors"></select></label>
+          <button type="button" class="text-button" id="logout" hidden>Sign out</button>
+        </div>
+      </header>
+
+      <section id="signin" class="sign-in" hidden>
+        <h2>Open your workspace</h2>
+        <p>Enter the access token issued by your workspace administrator.</p>
+        <form id="signin-form">
+          <label for="token">Workspace token</label>
+          <input id="token" name="token" type="password" autocomplete="off" maxlength="160" required>
+          <button type="submit" class="primary">Sign in</button>
+        </form>
+        <p id="signin-error" class="alert" role="alert" hidden></p>
+      </section>
+
+      <div id="workspace-app" class="content" hidden>
+        <section id="search-view">
+          <section class="hero" aria-labelledby="search-title">
+            <div class="hero-rings" aria-hidden="true"></div>
+            <div class="hero-inner">
+              <h2 id="search-title">Find workplace knowledge</h2>
+              <p>Search policies, playbooks, and handbooks you can access.</p>
+              <form class="search-form" id="search-form" role="search">
+                <i class="glass" aria-hidden="true"></i>
+                <label for="query" class="sr-only">Search documents</label>
+                <input type="search" id="query" name="q" placeholder="Search documents" maxlength="160" required>
+                <kbd aria-hidden="true">/</kbd>
+                <button class="primary" type="submit">Search</button>
+              </form>
+              <div id="suggestions" class="suggestions" hidden aria-label="Example searches">
+                <button type="button" data-query="vendor policy">Vendor policy</button>
+                <button type="button" data-query="travel expense">Travel expenses</button>
+                <button type="button" data-query="vendor support">Support handoff</button>
+              </div>
+            </div>
+          </section>
+          <p class="alert" id="search-error" role="alert" hidden></p>
+          <div class="results-layout">
+            <section class="results" aria-labelledby="results-title">
+              <div class="section-heading"><div><h2 id="results-title">Results</h2><p id="results-summary" aria-live="polite">Search your workspace to get started.</p></div><span id="cache-label" class="cache-state" hidden></span></div>
+              <ul id="results-list" class="results-list"></ul>
+            </section>
+            <aside class="answer" aria-labelledby="answer-title">
+              <div class="answer-heading"><span class="answer-mark" aria-hidden="true">✦</span><div><h2 id="answer-title">Cited answer</h2><p>Passages from accessible documents</p></div></div>
+              <div id="answer-content" class="answer-content" aria-live="polite"><p>Run a search to see the most relevant passages and their sources.</p></div>
+            </aside>
+          </div>
+        </section>
+
+        <section id="access-view" class="access-view" hidden aria-labelledby="access-title">
+          <h2 id="access-title">Group permissions</h2>
+          <p>Grant or revoke group access. Changes apply to new searches and answers immediately.</p>
+          <p class="alert" id="access-error" role="alert" hidden></p>
+          <p class="access-status" id="access-status" role="status"></p>
+          <div id="access-groups" class="access-groups"></div>
+          <section class="audit" aria-labelledby="audit-title">
+            <h3 id="audit-title">Recent changes</h3>
+            <ul id="audit-list"></ul>
+          </section>
+        </section>
+      </div>
+    </main>
+  </div>
+  <dialog id="document-dialog" aria-labelledby="document-title">
+    <div class="document-bar">
+      <span id="document-collection"></span>
+      <button type="button" class="text-button" id="close-document">Close</button>
+    </div>
+    <h2 id="document-title"></h2>
+    <p id="document-body"></p>
+  </dialog>
+</body>
+</html>

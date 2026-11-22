@@ -1,0 +1,49 @@
+name: permission-aware-search
+
+x-scope: &scope
+  image: permission-aware-search:local
+  build: .
+  environment:
+    DATABASE_URL: postgresql://scope:search-local@db:5432/scope
+    SCOPE_DEMO: "1"
+
+services:
+  db:
+    image: postgres:18
+    environment:
+      POSTGRES_DB: scope
+      POSTGRES_USER: scope
+      POSTGRES_PASSWORD: search-local
+    ports:
+      - "127.0.0.1:55493:5432"
+    volumes:
+      - scope-data:/var/lib/postgresql
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U scope -d scope"]
+      interval: 3s
+      timeout: 3s
+      retries: 25
+
+  init:
+    <<: *scope
+    command: ["init", "--demo"]
+    depends_on:
+      db:
+        condition: service_healthy
+
+  app:
+    <<: *scope
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:8894:8894"
+    depends_on:
+      init:
+        condition: service_completed_successfully
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8894/readyz', timeout=4)"]
+      interval: 4s
+      timeout: 5s
+      retries: 20
+
+volumes:
+  scope-data:

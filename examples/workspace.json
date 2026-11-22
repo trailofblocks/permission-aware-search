@@ -1,0 +1,18 @@
+{
+  "tenant_id": "example-co",
+  "name": "Example Co",
+  "groups": [{"slug": "procurement", "name": "Procurement"}],
+  "users": [
+    {"handle": "admin", "name": "Workspace Administrator", "role": "admin"},
+    {"handle": "buyer", "name": "Purchasing Team", "groups": ["procurement"]}
+  ],
+  "documents": [
+    {
+      "slug": "supplier-policy",
+      "title": "Supplier registration policy",
+      "collection": "Operations",
+      "group_slug": "procurement",
+      "body": "Suppliers must submit their registration form to Procurement before onboarding."
+    }
+  ]
+}

@@ -1,0 +1,23 @@
+[build-system]
+requires = ["setuptools>=64"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "permission-aware-search"
+version = "1.0.0"
+description = "Tenant-scoped workplace search and cited answers."
+requires-python = ">=3.12"
+readme = "README.md"
+dynamic = ["dependencies"]
+
+[project.scripts]
+scope-search = "scope_search.cli:main"
+
+[tool.setuptools.dynamic]
+dependencies = {file = ["requirements.txt"]}
+
+[tool.setuptools.packages.find]
+include = ["scope_search"]
+
+[tool.setuptools.package-data]
+scope_search = ["schema.sql", "web/*"]
