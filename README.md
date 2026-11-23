@@ -2,6 +2,17 @@
 
 Scope is a permission-aware search app for internal policies, playbooks, and handbooks. It uses FastAPI and PostgreSQL full-text search and includes a browser UI for search, cited excerpts, and permission changes. The local demo contains two synthetic workspaces.
 
+<!-- portfolio-demo-videos -->
+## Watch the demo
+
+Use it for internal answers where teams have different access. The walkthrough has on-screen captions.
+
+![Captioned Scope Search walkthrough](docs/demo/how-to.gif)
+
+[Download the narrated walkthrough](docs/demo/how-to.mp4?raw=true) · [Download the narrated overview](docs/demo/overview.mp4?raw=true)
+
+<!-- /portfolio-demo-videos -->
+
 ## Run the demo
 
 ```sh
